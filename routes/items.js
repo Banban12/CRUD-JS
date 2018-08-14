@@ -189,6 +189,26 @@ app.put('/edit/(:id)', function(req, res, next) {
     }
 })
 
+// DELETE USER
+app.delete('/delete/(:id)', function(req, res, next) {
+	var user = { id: req.params.id }
+	
+	req.getConnection(function(error, conn) {
+		conn.query('DELETE FROM items WHERE id = ' + req.params.id, user, function(err, result) {
+			
+			if (err) {
+				req.flash('error', err)
+				
+				res.redirect('/items')
+			} else {
+				req.flash('success', 'User deleted successfully! id = ' + req.params.id)
+				
+				res.redirect('/items')
+			}
+		})
+	})
+})
+
 
 
 module.exports = app
