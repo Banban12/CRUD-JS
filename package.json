@@ -1,0 +1,34 @@
+{
+  "name": "crud-js",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Banban12/CRUD-JS.git"
+  },
+  "keywords": [
+    "crud",
+    "simple",
+    "node",
+    "js"
+  ],
+  "author": "Ban daggao",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Banban12/CRUD-JS/issues"
+  },
+  "homepage": "https://github.com/Banban12/CRUD-JS#readme",
+  "dependencies": {
+    "cookie-parser": "^1.4.3",
+    "ejs": "^2.6.1",
+    "express-flash": "0.0.2",
+    "express-myconnection": "^1.0.4",
+    "express-session": "^1.15.6",
+    "method-override": "^3.0.0",
+    "mysql": "^2.16.0"
+  }
+}
