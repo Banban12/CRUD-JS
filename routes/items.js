@@ -54,7 +54,7 @@ app.post('/add', function(req, res, next){
 		
 		req.getConnection(function(error, conn) {
 			conn.query('INSERT INTO items SET ?', user, function(err, result) {
-				//if(err) throw err
+			
 				if (err) {
 					req.flash('error', err)
 					
@@ -99,6 +99,31 @@ app.post('/add', function(req, res, next){
     }
 })
 
+// SHOW EDIT USER FORM
+app.get('/edit/(:id)', function(req, res, next){
+	req.getConnection(function(error, conn) {
+		conn.query('SELECT * FROM items WHERE id = ' + req.params.id, function(err, rows, fields) {
+			if(err) throw err
+			
+			
+			if (rows.length <= 0) {
+				req.flash('error', 'User not found with id = ' + req.params.id)
+				res.redirect('/items')
+			}
+			else { 
+				
+				res.render('item/edit', {
+					title: 'Edit Item', 
+					
+					id: rows[0].id,
+					name: rows[0].name,
+					qty: rows[0].qt,
+					amount: rows[0].email					
+				})
+			}			
+		})
+	})
+})
 
 
 
