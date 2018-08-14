@@ -21,14 +21,14 @@
    <% if (data) { %>
     <% data.forEach(function(user){ %>
         <tr>
-            <td><%= item.id %></td>
-            <td><%= item.name %></td>
-            <td><%= item.qty %></td>
-            <td><%= item.amount %></td>
+            <td><%= user.id %></td>
+            <td><%= user.name %></td>
+            <td><%= user.qty %></td>
+            <td><%= user.amount %></td>
             <td>
                 <div style="float:left">
-                    <a href='/items/edit/<%= item.id %>'>Edit</a> &nbsp;                            
-                    <form method="post" action="/items/delete/<%= item.id %>" style="float:right">
+                    <a href='/items/edit/<%= user.id %>'>Edit</a> &nbsp;                            
+                    <form method="post" action="/items/delete/<%= user.id %>" style="float:right">
                         <input type="submit" name="delete" value='Delete' onClick="return confirm('Are you sure you want to delete?')" />
                         <input type="hidden" name="_method" value="DELETE" />
                     </form>
