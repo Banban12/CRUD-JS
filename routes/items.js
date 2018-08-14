@@ -118,11 +118,75 @@ app.get('/edit/(:id)', function(req, res, next){
 					id: rows[0].id,
 					name: rows[0].name,
 					qty: rows[0].qt,
-					amount: rows[0].email					
+					amount: rows[0].amount					
 				})
 			}			
 		})
 	})
+})
+
+// EDIT USER POST ACTION
+app.put('/edit/(:id)', function(req, res, next) {
+	req.assert('id', 'ID is required').notEmpty()          
+	req.assert('name', 'Name is required').notEmpty()       
+    req.assert('qty', 'QTY is required').notEmpty()  
+    req.assert('amount', 'Amount is required').notEmpty()  
+
+    var errors = req.validationErrors()
+    
+    if( !errors ) { 
+		var user = {
+			id: req.sanitize('id').escape().trim(),
+			name: req.sanitize('name').escape().trim(),
+            qty: req.sanitize('qty').escape().trim(),
+            amount: req.sanitize('amount').escape().trim(),
+		}
+		
+		req.getConnection(function(error, conn) {
+			conn.query('UPDATE items SET ? WHERE id = ' + req.params.id, user, function(err, result) {
+				
+				if (err) {
+					req.flash('error', err)
+					
+					
+					res.render('item/edit', {
+						title: 'Edit User',
+						id: req.params.id,
+						name: req.body.name,
+						qty: req.body.qty,
+						amount: req.body.amount
+					})
+				} else {
+					req.flash('success', 'Data updated successfully!')
+					
+					// render to views/user/add.ejs
+					res.render('item/edit', {
+						title: 'Edit Item',
+						id: req.params.id,
+						name: req.body.name,
+						qty: req.body.qty,
+						amount: req.body.amount
+					})
+				}
+			})
+		})
+	}
+	else {   
+		var error_msg = ''
+		errors.forEach(function(error) {
+			error_msg += error.msg + '<br>'
+		})
+		req.flash('error', error_msg)
+		
+	
+        res.render('item/edit', { 
+            title: 'Edit Item',            
+			id: req.params.id, 
+			name: req.body.name,
+			qty: req.body.qty,
+			amount: req.body.amount
+        })
+    }
 })
 
 

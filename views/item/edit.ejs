@@ -9,7 +9,7 @@
 <p style="color:green"><%- messages.success %></p>
 <% } %>
 
-<form action="/item/edit/<%= id %>" method="post" name="form1">
+<form  method="post" name="form1">
 <table width="25%" border="0">
 <tr> 
   <td>ID</td>
@@ -35,7 +35,4 @@
 <input type="hidden" name="_method" value="PUT" />
 </form>
 
-<!--
-including footer content which is common for all pages
--->
 <%- include ../layouts/footer.ejs %>
