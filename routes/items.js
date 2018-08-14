@@ -23,5 +23,18 @@ app.get('/', function(req, res, next) {
     })
 })
  
+// SHOW ADD USER FORM
+app.get('/add', function(req, res, next){	
+	// render to views/user/add.ejs
+	res.render('item/add', {
+		title: 'Add New Item',
+		id: '',
+		name: '',
+        qty: '',
+        amount: ''		
+	})
+})
+
+
 
 module.exports = app
